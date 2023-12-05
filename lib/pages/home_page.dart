@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import "package:flutter/material.dart";
+import "package:docket/sections/home_page_sections/no_docket.dart";
+import "package:docket/sections/home_page_sections/list_dockets.dart";
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -36,6 +38,11 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: Icon(Icons.add),
+      ),
+
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: NoDocket(),
       ),
     );
   }
