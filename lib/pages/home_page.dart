@@ -15,12 +15,27 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Docket"),
-        centerTitle: true,
-        elevation: 0,
+        title: Text("Docket",
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+          ),
+        ),
         actions: [
-          Icon(Icons.info),
-        ]
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, "/about_page");
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Icon(Icons.info),
+            ),
+          ),
+        ],
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
       ),
     );
   }
