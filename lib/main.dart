@@ -3,10 +3,17 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import "package:hive_flutter/hive_flutter.dart";
 import "package:docket/pages/home_page.dart";
 import "package:docket/pages/about_page.dart";
 
-void main() {
+void main() async {
+  // initialise app with hive
+  await Hive.initFlutter();
+
+  // open a box(i.e collection)
+  await Hive.openBox("todoBox");
+
   runApp(const DocketApp());
 }
 
@@ -17,10 +24,13 @@ class DocketApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      
       home: HomePage(),
+
       routes: {
         "/about_page": (context) => AboutPage(),
       },
+
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.orange,

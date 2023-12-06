@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import "package:flutter/material.dart";
+import 'package:hive_flutter/hive_flutter.dart';
 import "package:docket/sections/home_page_sections/no_docket.dart";
 import "package:docket/sections/home_page_sections/list_dockets.dart";
 
