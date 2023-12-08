@@ -1,17 +1,6 @@
-<!-- PROJECT LOGO -->
-<br />
+<br/>
 
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for buy me a coffee url
--->
-
-[![Stargazers](https://img.shields.io/github/stars/naijadeveloper/docket.svg?style=for-the-badge)](https://github.com/naijadeveloper/docket/stargazers)
-[![LinkedIn](https://img.shields.io/badge/-enoch_enujiugha-blue?style=for-the-badge&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/enoch-enujiugha-b12247112)
-[![Portfolio website](https://img.shields.io/badge/-portfolio-seagreen?style=for-the-badge)](https://naijadev.vercel.app/)
-[![Support me](https://img.shields.io/badge/buy_me_a_coffee-FFDD00?logo=buymeacoffee&style=for-the-badge&logoColor=black)](https://www.buymeacoffee.com/mmejuenoch)
+[![Stargazers](https://img.shields.io/github/stars/naijadeveloper/docket.svg?style=for-the-badge)](https://github.com/naijadeveloper/docket/stargazers) [![LinkedIn](https://img.shields.io/badge/-enoch_enujiugha-blue?style=for-the-badge&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/enoch-enujiugha-b12247112) [![Portfolio website](https://img.shields.io/badge/-portfolio-seagreen?style=for-the-badge)](https://naijadev.vercel.app/) [![Support me](https://img.shields.io/badge/buy_me_a_coffee-FFDD00?logo=buymeacoffee&style=for-the-badge&logoColor=black)](https://www.buymeacoffee.com/mmejuenoch)
 
 <br/>
 <div align="center">
@@ -50,7 +39,11 @@
     </li>
     <!-- <li><a href="#license">License</a></li> -->
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a>
+      <ul>
+        <li><a href="#inspiration">Inspiration</a></li>
+      </ul>
+    </li>
   </ol>
 </details>
 
@@ -65,8 +58,8 @@ Having a list of all the things you plan to do for that day, helps you stay focu
 
 ### Built With
 
-[![Flutter](https://img.shields.io/badge/flutter-2F75D8?style=for-the-badge&logo=flutter&logoColor=white)](https://docs.flutter.dev/)
-[![Dart](https://img.shields.io/badge/dart-132030?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev/guides)
+- [![Flutter](https://img.shields.io/badge/flutter-2F75D8?style=for-the-badge&logo=flutter&logoColor=white)](https://docs.flutter.dev/)
+- [![Dart](https://img.shields.io/badge/dart-132030?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev/guides)
 
 ## Usage
 
@@ -78,7 +71,60 @@ Having a list of all the things you plan to do for that day, helps you stay focu
   <img src="assets/images/post5.png" width="200" />
 </div>
 
-[flutter-shield]: https://img.shields.io/badge/flutter-2F75D8?style=for-the-badge&logo=flutter&logoColor=white
-[flutter-url]: https://docs.flutter.dev/
-[dart-shield]: https://img.shields.io/badge/dart-132030?style=for-the-badge&logo=dart&logoColor=white
-[dart-url]: https://dart.dev/guides
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this app better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a **star!** Thanks again!
+
+1. Fork the Project
+2. Clone project to local device
+3. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+4. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+5. Push to the Branch (`git push origin feature/AmazingFeature`)
+6. Open a Pull Request
+
+### Prerequisites
+
+- [flutter sdk](https://docs.flutter.dev/get-started/install)
+- [Android studio & sdk](https://developer.android.com/studio)
+- [Vs code](https://code.visualstudio.com/download) _optional_
+  Don't forget to install the **dart** and **flutter** extensions in vs code. I also found the **Error lens** extension very useful
+
+### Installation
+
+After cloning project to your local device, you would want to run in terminal
+
+```sh
+flutter pub get
+```
+
+## Contact
+
+- [Twitter@naijadeveloper](https://twitter.com/naijadeveloper)
+
+- [LinkedIn@enochenujiugha](https://www.linkedin.com/in/enoch-enujiugha-b12247112)
+
+- [Portfolio](https://naijadev.vercel.app/)
+
+- mmejuenoch@gmail.com / naijadeveloper@gmail.com
+
+<!-- Android play store link and Ios store link -->
+
+## Acknowledgments
+
+Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+
+- [Flutter_slidable](https://pub.dev/packages/flutter_slidable)
+- [Hive & Hive_flutter](https://pub.dev/packages/hive)
+- [Url_launcher](https://pub.dev/packages/url_launcher)
+- [Flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
+- [Flutter_native_splash](https://pub.dev/packages/flutter_native_splash)
+- [Img Shields](https://shields.io)
+- [Icons8](https://icons8.com/)
+- [Google fonts](https://fonts.google.com/)
+
+### Inspiration
+
+- [Mitch koko's full flutter beginner youtube tutorial](https://www.youtube.com/watch?v=HQ_ytw58tC4)
