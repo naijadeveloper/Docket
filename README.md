@@ -68,6 +68,16 @@ Having a list of all the things you plan to do for that day, helps you stay focu
 [![Flutter][flutter-shield]][flutter-url]
 [![Dart][dart-shield]][dart-url]
 
+## Usage
+
+<div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; align-items:center; align-content: start;">
+  <img src="assets/images/post1.png" width="200" />
+  <img src="assets/images/post2.png" width="200" />
+  <img src="assets/images/post3.png" width="200" />
+  <img src="assets/images/post4.png" width="200" />
+  <img src="assets/images/post5.png" width="200" />
+</div>
+
 <!-- LINKS (REFERENCE VARIABLES LINKS) -->
 
 [stars-shield]: https://img.shields.io/github/stars/naijadeveloper/docket.svg?style=for-the-badge
