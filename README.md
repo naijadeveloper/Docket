@@ -8,10 +8,10 @@
 *** for buy me a coffee url
 -->
 
-[![Stargazers][stars-shield]][stars-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-[![Portfolio Website][port-shield]][port-url]
-[![Support me][bmc-shield]][bmc-url]
+[![Stargazers](https://img.shields.io/github/stars/naijadeveloper/docket.svg?style=for-the-badge)](https://github.com/naijadeveloper/docket/stargazers)
+[![LinkedIn](https://img.shields.io/badge/-enoch_enujiugha-blue?style=for-the-badge&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/enoch-enujiugha-b12247112)
+[![Portfolio website](https://img.shields.io/badge/-portfolio-seagreen?style=for-the-badge)](https://naijadev.vercel.app/)
+[![Support me](https://img.shields.io/badge/buy_me_a_coffee-FFDD00?logo=buymeacoffee&style=for-the-badge&logoColor=black)](https://www.buymeacoffee.com/mmejuenoch)
 
 <br/>
 <div align="center">
@@ -65,8 +65,8 @@ Having a list of all the things you plan to do for that day, helps you stay focu
 
 ### Built With
 
-[![Flutter][flutter-shield]][flutter-url]
-[![Dart][dart-shield]][dart-url]
+[![Flutter](https://img.shields.io/badge/flutter-2F75D8?style=for-the-badge&logo=flutter&logoColor=white)](https://docs.flutter.dev/)
+[![Dart](https://img.shields.io/badge/dart-132030?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev/guides)
 
 ## Usage
 
@@ -78,16 +78,6 @@ Having a list of all the things you plan to do for that day, helps you stay focu
   <img src="assets/images/post5.png" width="200" />
 </div>
 
-<!-- LINKS (REFERENCE VARIABLES LINKS) -->
-
-[stars-shield]: https://img.shields.io/github/stars/naijadeveloper/docket.svg?style=for-the-badge
-[stars-url]: https://github.com/naijadeveloper/docket/stargazers
-[linkedin-shield]: https://img.shields.io/badge/-enoch_enujiugha-blue?style=for-the-badge&logo=Linkedin&logoColor=white
-[linkedin-url]: https://www.linkedin.com/in/enoch-enujiugha-b12247112
-[port-shield]: https://img.shields.io/badge/-portfolio-seagreen?style=for-the-badge
-[port-url]: https://naijadev.vercel.app/
-[bmc-shield]: https://img.shields.io/badge/buy_me_a_coffee-FFDD00?logo=buymeacoffee&style=for-the-badge&logoColor=black
-[bmc-url]: https://www.buymeacoffee.com/mmejuenoch
 [flutter-shield]: https://img.shields.io/badge/flutter-2F75D8?style=for-the-badge&logo=flutter&logoColor=white
 [flutter-url]: https://docs.flutter.dev/
 [dart-shield]: https://img.shields.io/badge/dart-132030?style=for-the-badge&logo=dart&logoColor=white
