@@ -114,8 +114,6 @@ flutter pub get
 
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
 - [Flutter_slidable](https://pub.dev/packages/flutter_slidable)
 - [Hive & Hive_flutter](https://pub.dev/packages/hive)
 - [Url_launcher](https://pub.dev/packages/url_launcher)
