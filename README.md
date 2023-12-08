@@ -1,5 +1,12 @@
 <!-- PROJECT LOGO -->
 <br />
+<div align="right" style="margin-bottom: 10px">
+  <a href="https://www.buymeacoffee.com/mmejuenoch" style="display: flex; justify-content: center; align-items: center; background-color: #d9b771; color: #222; width: 45%; border-radius: 3px; cursor: pointer; border: 2px solid #d19d32" onMouseOver="this.style.backgroundColor='#d4b066'" onMouseOut="this.style.backgroundColor='#d9b771'">
+    <img src="assets/icons/bmc.png" alt="buy me a coffee logo" width="40" />
+    <span>Buy me a coffee</span>
+  </a>
+</div>
+
 <div align="center">
   <a href="https://github.com/naijadeveloper/Docket">
     <img src="assets/icons/logo.png" alt="Logo" width="80" height="80">
@@ -26,17 +33,15 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
+    <li><a href="#usage">Usage</a></li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#contributing">Contributing</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <!-- <li><a href="#roadmap">Roadmap</a></li> -->
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
+    <!-- <li><a href="#license">License</a></li> -->
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
