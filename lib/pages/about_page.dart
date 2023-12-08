@@ -120,7 +120,8 @@ class _AboutPageState extends State<AboutPage> {
                     margin: EdgeInsets.only(top: 5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
-                        color: Colors.orange[500],
+                        color: Colors.orange[400],
+
                         border: Border(
                           top: BorderSide(
                             width: 0.5,

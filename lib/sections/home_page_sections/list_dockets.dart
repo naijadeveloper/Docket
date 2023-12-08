@@ -1,6 +1,16 @@
 
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+/*
+  [ // docket list
+    [ // parentIndex // one docket
+      {date: "12/Wednesday 6/2023", todos: 2, completed: 1}, // 0th childIndex is metadata
+      {todoName: "do blah blah", todoCompleted: false, dateTime: "2023-12-06 16:51:54.417"}
+      {todoName: "do another blah blah", todoCompleted: true, dateTime: "2023-12-06 18:51:54.417"}
+    ]
+  ]
+*/
+
 import "package:flutter/material.dart";
 import "package:docket/components/todo_tile.dart";
 
@@ -8,23 +18,28 @@ class ListDockets extends StatelessWidget {
   const ListDockets({
     super.key,
     required this.docketList,
-    required this.handleShowDeleteAllDialogBox,
+    required this.handleShowDeleteADocketDialogBox,
     required this.handleTodoCheckboxChange,
     required this.handleDeletingOfOneTodo,
+    required this.handleCheckIfDayHasPassed,
   });
 
   final List docketList;
-  final void Function(int) handleShowDeleteAllDialogBox;
+  final void Function(int) handleShowDeleteADocketDialogBox;
   final void Function(List<int>) handleTodoCheckboxChange;
   final void Function(List<int>) handleDeletingOfOneTodo;
+  final bool Function(List<DateTime>) handleCheckIfDayHasPassed;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
+      padding: EdgeInsets.only(bottom: 10),
       itemCount: docketList.length,
       itemBuilder: (context, parentIndex) {
+        
         var docket = docketList[parentIndex];
+        var hasDayPassed = handleCheckIfDayHasPassed([DateTime.now(), DateTime.parse(docket[1]["dateTime"])]); // compare dates, if same => false; else => true;
 
         var allWidgetsInADocket = List<Widget>.generate(docket.length, (childIndex) {
 
@@ -78,10 +93,10 @@ class ListDockets extends StatelessWidget {
                 ),
 
                 Positioned(
-                  top: 20,
-                  right: 30,
+                  top: 25,
+                  right: 25,
                   child: GestureDetector(
-                    onTap: () => handleShowDeleteAllDialogBox(parentIndex),
+                    onTap: () => handleShowDeleteADocketDialogBox(parentIndex),
                     child: Icon(Icons.delete),
                   ),
                 ),
@@ -90,6 +105,7 @@ class ListDockets extends StatelessWidget {
 
           } else {/////////////////////////////////////////
             return TodoTile(
+              enabled: !hasDayPassed,// when current day is same as docket day => true
               todoName: docket[childIndex]["todoName"], 
               todoCompleted: docket[childIndex]["todoCompleted"], 
               onChanged: () => handleTodoCheckboxChange([parentIndex, childIndex]), 
@@ -100,7 +116,7 @@ class ListDockets extends StatelessWidget {
 
         // returned container for each docket
         return Container(
-          margin: parentIndex == 0? EdgeInsets.only(top: 12) : EdgeInsets.only(top: 40),
+          margin: parentIndex == 0? EdgeInsets.only(top: 10) : EdgeInsets.only(top: 40),
           child: Column(
             children: allWidgetsInADocket,
           ),

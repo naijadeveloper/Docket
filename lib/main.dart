@@ -12,7 +12,7 @@ void main() async {
   await Hive.initFlutter();
 
   // open a box(i.e collection)
-  await Hive.openBox("todoBox");
+  await Hive.openBox("docketBox");
 
   runApp(const DocketApp());
 }
@@ -44,6 +44,12 @@ class DocketApp extends StatelessWidget {
           highlightElevation: 0,
           focusElevation: 0,
           hoverElevation: 0,
+        ),
+
+        dialogTheme: DialogTheme(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+          ),
         ),
 
         primarySwatch: Colors.orange, // not working, not sure why

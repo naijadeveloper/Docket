@@ -2,6 +2,8 @@
 
 import "package:flutter/material.dart";
 import 'package:hive_flutter/hive_flutter.dart';
+import "package:docket/functions/home_page_funtions.dart";
+import "package:docket/data/localdb.dart";
 import "package:docket/sections/home_page_sections/no_docket.dart";
 import "package:docket/sections/home_page_sections/list_dockets.dart";
 
@@ -13,6 +15,37 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  // def all needed props
+  final localdb = LocalDB();
+  late final Box<dynamic> docketBox;
+  late final HomeFunctions homeFunctions;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // initialse docketbox
+    docketBox = localdb.docketBox;
+
+    // initialise the home functions to get access to the context and setState
+    homeFunctions = HomeFunctions(
+      context: context,
+      setState: setState,
+      dockets: localdb.loadData,
+      updateDB: localdb.updateDatabase
+    );
+
+    // if first time opening app create initial data
+    if(docketBox.get("DOCKETLIST") == null) {
+      var newTodo = {"todoName": "Slide to delete a todo", "todoCompleted": false, "dateTime": DateTime.now().toString()};
+
+      homeFunctions.handleSavingOfTodo(newTodo);
+    } else {
+      homeFunctions.docketList = localdb.loadData;
+    }
+
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -37,13 +70,24 @@ class _HomePageState extends State<HomePage> {
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: homeFunctions.handleFloatingBtnClicked,
         child: Icon(Icons.add),
       ),
 
       body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: NoDocket(),
+        padding: const EdgeInsets.only(left: 10, right: 10),
+        child: homeFunctions.docketList.isEmpty? 
+          NoDocket() : ListDockets(
+            docketList: homeFunctions.docketList,
+
+            handleTodoCheckboxChange: homeFunctions.handleTodoCheckboxChange,
+
+            handleDeletingOfOneTodo: homeFunctions.handleDeletingOfOneTodo,
+
+            handleShowDeleteADocketDialogBox: homeFunctions.handleShowDeleteADocketDialogBox,
+
+            handleCheckIfDayHasPassed: homeFunctions.handleCheckIfDayHasPassed,
+          ),
       ),
     );
   }

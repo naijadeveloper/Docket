@@ -5,13 +5,15 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 class TodoTile extends StatelessWidget {
   const TodoTile({
-    super.key, 
+    super.key,
+    required this.enabled, 
     required this.todoName, 
     required this.todoCompleted, 
     required this.onChanged,
     required this.deleteTodo,
   });
 
+  final bool enabled;
   final String todoName;
   final bool todoCompleted;
   final void Function() onChanged;
@@ -19,50 +21,54 @@ class TodoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Slidable(
-      endActionPane: ActionPane(
-        extentRatio: 0.3,
-        motion: BehindMotion(),
-        children: [
-          SizedBox(width: 20),
-
-          SlidableAction(
-            onPressed: (context) => deleteTodo(),
-            icon: Icons.delete,
-            label: "Delete",
-            backgroundColor: Colors.red.shade400,
-            borderRadius: BorderRadius.circular(8),
-          )
-        ],
-      ),
-
-      child: Container(
-        padding: EdgeInsets.all(20),
-        height: 70,
-        decoration: BoxDecoration(
-          color: Colors.orange[50],
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.orange),
-        ),
-
-        child: Row(
+    return Padding(
+      padding: const EdgeInsets.only(left: 8, right: 8, top:10),
+      child: Slidable(
+        enabled: enabled,
+        endActionPane: ActionPane(
+          extentRatio: 0.3,
+          motion: StretchMotion(),
           children: [
-            Checkbox(
-              value: todoCompleted,
-              onChanged: (value) => onChanged(),
-              activeColor: Colors.black,
-            ),
-
-            Expanded(
-              child: Text(todoName,
-                style: TextStyle(
-                  fontSize: 16,
-                  decoration: todoCompleted == true? TextDecoration.lineThrough : TextDecoration.none,
-                  decorationThickness: 2.5,
+            SizedBox(width: 10),
+      
+            SlidableAction(
+              onPressed: (context) => deleteTodo(),
+              icon: Icons.delete,
+              label: "Delete",
+              backgroundColor: Colors.red.shade400,
+              borderRadius: BorderRadius.circular(8),
+            )
+          ],
+        ),
+      
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 20),
+          height: 70,
+          decoration: BoxDecoration(
+            color: Colors.orange[50],
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Colors.orange),
+          ),
+      
+          child: Row(
+            children: [
+              Checkbox(
+                value: todoCompleted,
+                onChanged: (value) => onChanged(),
+                activeColor: Colors.black,
+              ),
+      
+              Expanded(
+                child: Text(todoName,
+                  style: TextStyle(
+                    fontSize: 16,
+                    decoration: todoCompleted == true? TextDecoration.lineThrough : TextDecoration.none,
+                    decorationThickness: 2.5,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
