@@ -122,6 +122,7 @@ flutter pub get
 - [Img Shields](https://shields.io)
 - [Icons8](https://icons8.com/)
 - [Google fonts](https://fonts.google.com/)
+- [README Template](https://github.com/othneildrew/Best-README-Template)
 
 ### Inspiration
 
