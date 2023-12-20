@@ -51,7 +51,7 @@
 
 ## About The Project
 
-<i style='color:seagreen'>Docket =</i> "_An agenda or list of things to be done._". For example, If someone asks you what's on your <strong>docket</strong> for the day, they really just want to know what you're doing today.
+**Docket** = "_An agenda or list of things to be done._". For example, If someone asks you what's on your **docket** for the day, they really just want to know what you're doing today.
 The app lets you create a docket each day, listing out all the actions you would like to do that day.
 
 Having a list of all the things you plan to do for that day, helps you stay focused and more organised.✌🏾
@@ -67,7 +67,6 @@ Having a list of all the things you plan to do for that day, helps you stay focu
   <img src="assets/images/post1.png" width="200" />
   <img src="assets/images/post2.png" width="200" />
   <img src="assets/images/post3.png" width="200" />
-  <img src="assets/images/post4.png" width="200" />
   <img src="assets/images/post5.png" width="200" />
 </div>
 

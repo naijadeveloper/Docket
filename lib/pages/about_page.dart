@@ -97,7 +97,7 @@ class _AboutPageState extends State<AboutPage> {
               ),
           
               Container(
-                alignment: Alignment(border? 0.0 : -0.05, border? 0.6 : 0.61),
+                alignment: Alignment(0.0, border? 0.6 : 0.61),
                 child: GestureDetector(
                   onTapDown: (TapDownDetails dets) {
                     setState(() {
@@ -134,7 +134,7 @@ class _AboutPageState extends State<AboutPage> {
                           ),
                                 
                           left: BorderSide(
-                            width: border? 2.5 : 0.5,
+                            width: 0.5,
                             color: Colors.orange[800]!,
                           ),
                                 
