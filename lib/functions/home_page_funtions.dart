@@ -26,9 +26,7 @@ class HomeFunctions {
 
   List get docketList => _dockets;
   
-  set docketList(List dockets) {
-    _dockets = dockets;
-  }
+  set docketList(List dockets) => _dockets = dockets;
 
   // Function to handle the clicking of the floating action button
   void handleFloatingBtnClicked() async{

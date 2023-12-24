@@ -3,6 +3,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import "package:hive_flutter/hive_flutter.dart";
 import "package:docket/pages/home_page.dart";
 import "package:docket/pages/about_page.dart";
@@ -14,7 +15,11 @@ void main() async {
   // open a box(i.e collection)
   await Hive.openBox("docketBox");
 
-  runApp(const DocketApp());
+  runApp(
+    ProviderScope(
+      child: DocketApp(),
+    ),
+  );
 }
 
 class DocketApp extends StatelessWidget {
@@ -25,6 +30,8 @@ class DocketApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       
+      title: "Docket",
+
       home: HomePage(),
 
       routes: {
