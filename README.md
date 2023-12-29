@@ -114,7 +114,8 @@ flutter pub get
 ## Acknowledgments
 
 - [Flutter_slidable](https://pub.dev/packages/flutter_slidable)
-- [Hive & Hive_flutter](https://pub.dev/packages/hive)
+- [Hive & Hive_flutter & Hive_generator](https://pub.dev/packages/hive)
+- [Riverpod](https://riverpod.dev/docs/introduction/why_riverpod)
 - [Url_launcher](https://pub.dev/packages/url_launcher)
 - [Flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
 - [Flutter_native_splash](https://pub.dev/packages/flutter_native_splash)
