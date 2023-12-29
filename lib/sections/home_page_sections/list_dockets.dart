@@ -1,122 +1,141 @@
 
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-/*
-  [ // docket list
-    [ // parentIndex // one docket
-      {date: "12/Wednesday 6/2023", todos: 2, completed: 1}, // 0th childIndex is metadata
-      {todoName: "do blah blah", todoCompleted: false, dateTime: "2023-12-06 16:51:54.417"}
-      {todoName: "do another blah blah", todoCompleted: true, dateTime: "2023-12-06 18:51:54.417"}
-    ]
-  ]
-*/
-
 import "package:flutter/material.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:docket/providers/dockets_provider.dart";
 import "package:docket/components/todo_tile.dart";
+import "package:docket/state/docket_model.dart";
+import "package:docket/functions/home_page_funtions.dart";
 
-class ListDockets extends StatelessWidget {
-  const ListDockets({
-    super.key,
-    required this.docketList,
-    required this.handleShowDeleteADocketDialogBox,
-    required this.handleTodoCheckboxChange,
-    required this.handleDeletingOfOneTodo,
-    required this.handleCheckIfDayHasPassed,
-  });
+class ListDockets extends ConsumerWidget with HomeFunctions {
+  const ListDockets({super.key});
 
-  final List docketList;
-  final void Function(int) handleShowDeleteADocketDialogBox;
-  final void Function(List<int>) handleTodoCheckboxChange;
-  final void Function(List<int>) handleDeletingOfOneTodo;
-  final bool Function(List<DateTime>) handleCheckIfDayHasPassed;
+  void handleTodoTileOnChanged(int docketIndex, int todoIndex, BuildContext context, WidgetRef ref) {
+    var res = ref.read(docketsProvider.notifier).toggle(docketIndex: docketIndex, todoIndex: todoIndex);
+    if(res == false) {
+      // show info dialog, tells user that the day for docket has passed
+      handleShowInfoAlertDialog(context, docketIndex);
+    }
+  }
+
+
+  void handleTodoTileDelete(int docketIndex, int todoIndex, BuildContext context, WidgetRef ref) {
+    var res = ref.read(docketsProvider.notifier).deleteATodo(docketIndex: docketIndex, todoIndex: todoIndex);
+    if(res == false) {
+      // show info dialog, tells user that the day for docket has passed
+      handleShowInfoAlertDialog(context, docketIndex);
+    }
+  }
+
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    List<Docket> docketList = ref.watch(docketsProvider);
+    
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
       padding: EdgeInsets.only(bottom: 10),
       itemCount: docketList.length,
-      itemBuilder: (context, parentIndex) {
+      itemBuilder: (context, docketIndex) {
+
+        if(docketList.isEmpty) return SizedBox();
         
-        var docket = docketList[parentIndex];
-        var hasDayPassed = handleCheckIfDayHasPassed([DateTime.now(), DateTime.parse(docket[1]["dateTime"])]); // compare dates, if same => false; else => true;
+        var docket = docketList[docketIndex];
+        var todos = docket.todos;
+        var isDocketForToday = docket == ref.read(docketsProvider.notifier).todayDocket()? true : false;
 
-        var allWidgetsInADocket = List<Widget>.generate(docket.length, (childIndex) {
+        var allWidgetsInADocket = List<Widget>.generate(todos.length, (todoIndex) {
 
-          if(childIndex == 0) {/////////////////////////////////////////
-            return Stack(
+          if(todoIndex == 0) {
+            // when its the 0th index return both the formatted meta data widgets and the todo
+            // but for for consequent indexes return only the todo
+            var formattedMetaData = docket.formattedMetaData();
+            return Column(
               children: [
-                Column(
+                Stack(
                   children: [
-                    Text(docket[childIndex]["date"],
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey.shade800,
-                        fontSize: 16, 
-                      ),
-                    ),
-
-                    SizedBox(height: 5),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    Column(
                       children: [
-                        Text("(${docket[childIndex]['todos']}) ${docket[childIndex]['todos'] == 1? 'Todo' : 'Todos'}",
+                        Text("${formattedMetaData['date']}",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                            color: Colors.orange[800]
+                            color: Colors.grey.shade800,
+                            fontSize: 16, 
                           ),
                         ),
-
-                        SizedBox(width: 3),
-
-                          Text("|",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                
+                        SizedBox(height: 5),
+                
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("(${formattedMetaData['todos']}) ${formattedMetaData['todos'] == 1? 'Todo' : 'Todos'}",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                                color: Colors.orange[800]
+                              ),
                             ),
-                          ),
-
-                          SizedBox(width: 3),
-
-                          Text("Completed (${docket[childIndex]['completed']})",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                              color: Colors.green[500]
-                            ),
-                          ),
-                      ],
+                
+                            SizedBox(width: 3),
+                
+                              Text("|",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
+                              ),
+                
+                              SizedBox(width: 3),
+                
+                              Text("Completed (${formattedMetaData['completed']})",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  color: Colors.green[500]
+                                ),
+                              ),
+                          ],
+                        ),
+                      ]
+                    ),
+                
+                    Positioned(
+                      top: 25,
+                      right: 25,
+                      child: GestureDetector(
+                        onTap: () => handleShowDeleteADocketAlertDialog(context, docketIndex),
+                        child: Icon(Icons.delete),
+                      ),
                     ),
                   ]
                 ),
 
-                Positioned(
-                  top: 25,
-                  right: 25,
-                  child: GestureDetector(
-                    onTap: () => handleShowDeleteADocketDialogBox(parentIndex),
-                    child: Icon(Icons.delete),
-                  ),
-                ),
-              ]
+                TodoTile(
+                  enabled: isDocketForToday,
+                  todoName: todos[todoIndex].todoName, 
+                  todoCompleted: todos[todoIndex].todoCompleted, 
+                  onChanged: () => handleTodoTileOnChanged(docketIndex, todoIndex, context, ref), 
+                  deleteTodo: () => handleTodoTileDelete(docketIndex, todoIndex, context, ref),
+                )
+              ],
             );
 
-          } else {/////////////////////////////////////////
+          } else {
             return TodoTile(
-              enabled: !hasDayPassed,// when current day is same as docket day => true
-              todoName: docket[childIndex]["todoName"], 
-              todoCompleted: docket[childIndex]["todoCompleted"], 
-              onChanged: () => handleTodoCheckboxChange([parentIndex, childIndex]), 
-              deleteTodo: () => handleDeletingOfOneTodo([parentIndex, childIndex]),
+              enabled: isDocketForToday,
+              todoName: todos[todoIndex].todoName, 
+              todoCompleted: todos[todoIndex].todoCompleted, 
+              onChanged: () => handleTodoTileOnChanged(docketIndex, todoIndex, context, ref), 
+              deleteTodo: () => handleTodoTileDelete(docketIndex, todoIndex, context, ref),
             );
           }
         });
 
         // returned container for each docket
         return Container(
-          margin: parentIndex == 0? EdgeInsets.only(top: 10) : EdgeInsets.only(top: 40),
+          margin: docketIndex == 0? EdgeInsets.only(top: 10) : EdgeInsets.only(top: 40),
           child: Column(
             children: allWidgetsInADocket,
           ),

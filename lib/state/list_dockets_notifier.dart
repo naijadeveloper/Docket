@@ -9,7 +9,19 @@ class ListOfDocketsNotifier extends Notifier<List<Docket>> {
   // We initialize the list of dockets to an empty list
   @override
   List<Docket> build() {
-    return localdb.loadData;
+    if(localdb.loadData == null) {
+      // build init todo
+      return [Docket(todos: [
+        Todo(
+          todoName: "Slide to delete a todo",
+          todoCompleted: false,
+          dateTime: DateTime.now().toString(),
+        ),
+      ])];
+    } else {
+      // return existing list of dockets
+      return localdb.loadData!;
+    }
   }
 
 
@@ -38,7 +50,11 @@ class ListOfDocketsNotifier extends Notifier<List<Docket>> {
     sortDocketList();
 
     //save to database
-    localdb.updateDatabase(state);
+    var allTodos = [
+      for(final docket in state)
+        ...docket.todos
+    ];
+    localdb.updateDatabase(allTodos);
   }
 
 
@@ -69,7 +85,11 @@ class ListOfDocketsNotifier extends Notifier<List<Docket>> {
     ];
 
     //save to database
-    localdb.updateDatabase(state);
+    var allTodos = [
+      for(final docket in state)
+        ...docket.todos
+    ];
+    localdb.updateDatabase(allTodos);
 
     return true;
   }
@@ -89,22 +109,36 @@ class ListOfDocketsNotifier extends Notifier<List<Docket>> {
         if(aTodo != theTodo) aTodo
     ];
 
-    state = [
-      for(final aDocket in state)
-        if(aDocket == theDocket)
-          aDocket.copyWith([...todos])
-        else
-          aDocket
-    ];
+    // if that is the last todo in docket then just remove the docket
+    if(todos.isEmpty) {
+      state = [
+        for(final aDocket in state)
+          if(aDocket != theDocket) aDocket
+      ];
+    } else {
+      state = [
+        for(final aDocket in state)
+          if(aDocket == theDocket)
+            aDocket.copyWith([...todos])
+          else
+            aDocket
+      ];
+    }
     
     //save to database
-    localdb.updateDatabase(state);
+    var allTodos = [
+      for(final docket in state)
+        ...docket.todos
+    ];
+    localdb.updateDatabase(allTodos);
 
     return true;
   }
 
 
   void deleteADocket(int docketIndex) {
+    if(state.isEmpty) return;
+    
     var theDocket = state[docketIndex];
 
     state = [
@@ -113,23 +147,22 @@ class ListOfDocketsNotifier extends Notifier<List<Docket>> {
     ];
 
     //save to database
-    localdb.updateDatabase(state);
+    var allTodos = [
+      for(final docket in state)
+        ...docket.todos
+    ];
+    localdb.updateDatabase(allTodos);
   }
 
 
   void sortDocketList() {
     var theState = [...state];
     
-    theState.sort((a,b) => b.metaData()["day"]!.compareTo(a.metaData()["day"]!));
-    theState.sort((a,b) => b.metaData()["month"]!.compareTo(a.metaData()["month"]!));
-    theState.sort((a,b) => b.metaData()["year"]!.compareTo(a.metaData()["year"]!));
+    theState.sort((a,b) => b.dateMetaData()["day"]!.compareTo(a.dateMetaData()["day"]!));
+    theState.sort((a,b) => b.dateMetaData()["month"]!.compareTo(a.dateMetaData()["month"]!));
+    theState.sort((a,b) => b.dateMetaData()["year"]!.compareTo(a.dateMetaData()["year"]!));
 
     state = [...theState];
-  }
-
-
-  bool isDocketListEmpty() {
-    return state.isEmpty;
   }
 
 
@@ -138,7 +171,7 @@ class ListOfDocketsNotifier extends Notifier<List<Docket>> {
     Docket? currentDocket;
     //
     for(final docket in state) {
-      var parsedDateTime = docket.metaData();
+      var parsedDateTime = docket.dateMetaData();
 
       if((currentDateTime.year == parsedDateTime["year"]) && 
       (currentDateTime.month == parsedDateTime["month"]) && 

@@ -1,18 +1,14 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import "package:docket/providers/dockets_provider.dart";
+import "package:docket/state/todo_model.dart";
 import "package:flutter/material.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 
 class CreateTodoDialog extends StatelessWidget {
-  const CreateTodoDialog({
-    super.key,
-    required this.controller, 
-    required this.onSave, 
-    required this.onCancel
-  });
+  CreateTodoDialog({super.key});
 
-  final TextEditingController controller;
-  final VoidCallback onSave;
-  final VoidCallback onCancel;
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -56,30 +52,54 @@ class CreateTodoDialog extends StatelessWidget {
             maxLength: 35,
           ),
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              MaterialButton(
-                onPressed: onSave,
-                color: Colors.orange,
-                highlightElevation: 0,
-                elevation: 0,
-                highlightColor: Colors.orange[600],
-                child: Text("Save"),
-              ),
-
-              SizedBox(width: 10),
-
-              MaterialButton(
-                onPressed: onCancel,
-                color: Colors.grey[700],
-                textColor: Colors.grey[100],
-                highlightElevation: 0,
-                elevation: 0,
-                highlightColor: Colors.grey[600],
-                child: Text("Cancel"),
-              )
-            ]
+          Consumer(
+            builder: (context, ref, _) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  MaterialButton(
+                    onPressed: () {
+                      // call save method
+                      if(controller.text.length >= 3) {
+                        ref.read(docketsProvider.notifier).addTodo(
+                          Todo(
+                            todoName: controller.text,
+                            todoCompleted: false,
+                            dateTime: DateTime.now().toString(),
+                          ),
+                        );
+                        // remove widget
+                        Navigator.of(context).pop();
+                      }
+                      // clear controller
+                      controller.clear();
+                    },
+                    color: Colors.orange,
+                    highlightElevation: 0,
+                    elevation: 0,
+                    highlightColor: Colors.orange[600],
+                    child: Text("Save"),
+                  ),
+              
+                  SizedBox(width: 10),
+              
+                  MaterialButton(
+                    onPressed: () {
+                      // remove dialog box
+                      Navigator.of(context).pop();
+                      // clear controller
+                      controller.clear();
+                    },
+                    color: Colors.grey[700],
+                    textColor: Colors.grey[100],
+                    highlightElevation: 0,
+                    elevation: 0,
+                    highlightColor: Colors.grey[600],
+                    child: Text("Cancel"),
+                  )
+                ]
+              );
+            }
           ),
         ],
       ),

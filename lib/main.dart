@@ -2,6 +2,7 @@
 
 // ignore_for_file: prefer_const_constructors
 
+import "package:docket/state/todo_model.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import "package:hive_flutter/hive_flutter.dart";
@@ -11,6 +12,9 @@ import "package:docket/pages/about_page.dart";
 void main() async {
   // initialise app with hive
   await Hive.initFlutter();
+
+  // Registering the adapter
+  Hive.registerAdapter(TodoAdapter());
 
   // open a box(i.e collection)
   await Hive.openBox("docketBox");
